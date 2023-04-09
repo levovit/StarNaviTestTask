@@ -14,7 +14,7 @@ router = APIRouter()
 
 
 @router.post("/login")
-async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
                 db: Annotated[Session, Depends(get_db)]):
     user = authenticate_user(db, form_data.username, form_data.password)
     if not user:

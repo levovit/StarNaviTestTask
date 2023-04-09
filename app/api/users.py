@@ -13,7 +13,7 @@ router = APIRouter()
 
 
 @router.post("/signup", response_model=user_scheme.User)
-async def create_user_route(user: user_scheme.UserCreate,
+def create_user_route(user: user_scheme.UserCreate,
                             db: Annotated[Session, Depends(get_db)]) -> user_scheme.User:
     existing_user = get_existing_user(db, user.username, user.email)
     if existing_user:
@@ -29,7 +29,7 @@ async def create_user_route(user: user_scheme.UserCreate,
 
 
 @router.get("{user_id}/activity/", response_model=UserActivity)
-async def get_user_activity(user_id: int,
+def get_user_activity(user_id: int,
                             db: Annotated[Session, Depends(get_db)]) -> UserActivity:
     user = get_user_by_id(db, user_id)
     return UserActivity(
