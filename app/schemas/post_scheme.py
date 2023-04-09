@@ -15,7 +15,7 @@ class Post(PostBase):
     id: int
     user_id: int
     created_at: datetime
-    likes: int
+    like_count: int
 
     class Config:
         orm_mode = True

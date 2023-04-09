@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from passlib.hash import bcrypt
 from models.base import Base
@@ -13,6 +14,9 @@ class User(Base):
     password_hash = Column(String(100), nullable=False)
     last_login = Column(DateTime(timezone=True), nullable=True)
     last_request = Column(DateTime(timezone=True), nullable=True)
+
+    likes = relationship("Like", back_populates="user")
+    posts = relationship("Post", back_populates="user")
 
     def set_password(self, password: str):
         self.password_hash = bcrypt.hash(password)
