@@ -7,8 +7,7 @@ from sqlalchemy.orm import Session
 
 from config import settings
 from models.user import User
-from utils.db import get_db
-
+from utils.db_utils import get_db
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
@@ -48,6 +47,13 @@ def get_current_user(db: Annotated[Session, Depends(get_db)],
         return user
     except jwt.exceptions.InvalidTokenError:
         raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+
+
+def authenticate_user(db: Session, username: str, password: str) -> Optional[User]:
+    user = db.query(User).filter(User.username == username).first()
+    if user and user.check_password(password):
+        return user
+    return None
 
 
 def update_last_login(db: Session, user: User):
