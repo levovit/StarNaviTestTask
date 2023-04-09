@@ -2,14 +2,14 @@ version: "3.9"
 
 services:
   web:
-    build: .
+    build: app/
     ports:
       - "8000:8000"
     volumes:
       - .:/app
     environment:
       - ENVIRONMENT=development
-      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@db:${DB_PORT}/${DB_NAME}
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@db:${DB_PORT}/${DB_NAME}
     depends_on:
       - db
 

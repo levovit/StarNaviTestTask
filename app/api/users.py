@@ -8,7 +8,7 @@ router = APIRouter()
 
 
 @router.post("/signup")
-async def create_user(user: User, db: Session = Depends(get_db)) -> User:
+async def create_user(user, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(
         (User.username == user.username) | (User.email == user.email)
     ).first()

@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.post("/")
-async def create_post(post: Post, db: Session = Depends(get_db)):
+async def create_post(post, db: Session = Depends(get_db)):
     db.add(post)
     db.commit()
     db.refresh(post)
