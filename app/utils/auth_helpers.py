@@ -1,7 +1,13 @@
-from typing import Optional
+from typing import Optional, Annotated
 from datetime import datetime, timedelta
 import jwt
+from fastapi import Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer
+
 from app.config import settings
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 
 def create_jwt_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
@@ -21,3 +27,15 @@ def decode_jwt_token(token: str) -> dict:
         return payload
     except jwt.PyJWTError:
         raise ValueError("Invalid token")
+
+
+def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]) -> str:
+    try:
+        payload = decode_jwt_token(token)
+        user_id = payload.get("sub")
+        if user_id is None:
+            raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+        return user_id
+    except jwt.exceptions.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+

@@ -19,8 +19,9 @@ async def create_user(user: user_scheme.UserCreate, db: Session = Depends(get_db
             detail="Username or email already exists",
         )
 
-    user.set_password(user.password_hash)
-    db.add(user)
+    new_user = User(username=user.username, email=user.email)
+    new_user.set_password(user.password)
+    db.add(new_user)
     db.commit()
-    db.refresh(user)
-    return user
+    db.refresh(new_user)
+    return new_user
