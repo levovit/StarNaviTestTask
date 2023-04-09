@@ -6,7 +6,9 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
+      - ./app/alembic:/alembic
+    env_file:
+      - .env
     environment:
       - ENVIRONMENT=development
       - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@db:${DB_PORT}/${DB_NAME}
@@ -15,6 +17,8 @@ services:
 
   db:
     image: postgres:13
+    ports:
+      - "5432:5432"
     env_file:
       - .env
     environment:
@@ -23,6 +27,18 @@ services:
       - POSTGRES_DB=${DB_NAME}
     volumes:
       - db_data:/var/lib/postgresql/data
+
+#  test:
+#    build:
+#      context: app/
+#      target: testing
+#    env_file:
+#      - .env
+#    environment:
+#      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@db:${DB_PORT}/${DB_NAME}
+#    depends_on:
+#      - db
+#    command: [ "pytest", "tests" ]
 
 volumes:
   db_data:

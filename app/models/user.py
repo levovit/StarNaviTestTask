@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.sql import func
 from passlib.hash import bcrypt
-from app.models.base import Base
+from models.base import Base
 
 
 class User(Base):
