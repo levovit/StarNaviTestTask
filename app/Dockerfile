@@ -7,9 +7,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-#FROM base AS testing
+FROM base AS development
 
 EXPOSE 8000
 
 RUN chmod +x ./entrypoint.sh
 ENTRYPOINT ["/bin/sh", "-c", "./entrypoint.sh"]
+
+FROM base AS test
+
+ENTRYPOINT ["pytest", "tests/"]

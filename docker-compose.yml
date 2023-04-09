@@ -1,8 +1,9 @@
 version: "3.9"
-
 services:
   web:
-    build: app/
+    build:
+      context: app/
+      target: development
     ports:
       - "8000:8000"
     volumes:
@@ -28,17 +29,16 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
-#  test:
-#    build:
-#      context: app/
-#      target: testing
-#    env_file:
-#      - .env
-#    environment:
-#      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@db:${DB_PORT}/${DB_NAME}
-#    depends_on:
-#      - db
-#    command: [ "pytest", "tests" ]
+  test:
+    build:
+      context: app/
+      target: test
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=sqlite:///./test.db
+    depends_on:
+      - db
 
 volumes:
   db_data:
