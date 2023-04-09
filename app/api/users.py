@@ -1,14 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.models.user import User
+from app.schemas import user_scheme
 from app.utils.db import get_db
 
 
 router = APIRouter()
 
 
-@router.post("/signup")
-async def create_user(user, db: Session = Depends(get_db)):
+@router.post("/signup", response_model=user_scheme.User)
+async def create_user(user: user_scheme.UserCreate, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(
         (User.username == user.username) | (User.email == user.email)
     ).first()

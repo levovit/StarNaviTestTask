@@ -4,24 +4,26 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 from app.models.post import Post
 from app.utils.db import get_db
+from app.schemas import post_scheme
+
 
 router = APIRouter()
 
 
-@router.post("/")
-async def create_post(post, db: Session = Depends(get_db)):
+@router.post("/", response_model=post_scheme.Post)
+async def create_post(post: post_scheme.PostCreate, db: Session = Depends(get_db)):
     db.add(post)
     db.commit()
     db.refresh(post)
     return post
 
 
-@router.get("/")
+@router.get("/", response_model=list[post_scheme.Post])
 async def get_all_posts(db: Session = Depends(get_db)):
     return db.query(Post).all()
 
 
-@router.post("/{post_id}/like")
+@router.post("/{post_id}/like", response_model=post_scheme.Post)
 async def like_post(post_id: int, db: Session = Depends(get_db)):
     post = db.query(Post).filter(Post.id == post_id).first()
     if not post:
@@ -35,7 +37,7 @@ async def like_post(post_id: int, db: Session = Depends(get_db)):
     return post
 
 
-@router.post("/{post_id}/unlike")
+@router.post("/{post_id}/unlike", response_model=post_scheme.Post)
 async def unlike_post(post_id: int, db: Session = Depends(get_db)):
     post = db.query(Post).filter(Post.id == post_id).first()
     if not post:
