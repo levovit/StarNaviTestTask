@@ -1,0 +1,20 @@
+# Python files
+__pycache__/
+*.pyc
+
+# Virtual Enviroment
+__pypackages__/
+venv/
+
+# Test files
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Other files
+.env
+.vscode/
+.idea/
+*.log
+*.swp
+*.swo
