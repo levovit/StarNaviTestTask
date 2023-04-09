@@ -17,7 +17,7 @@ router = APIRouter()
 async def create_post(post: post_scheme.PostCreate,
                       current_user: Annotated[user_scheme.User, Depends(get_current_user)],
                       db: Annotated[Session, Depends(get_db)]):
-    new_post = Post(title=post.title, content=post.content, user_id=current_user)
+    new_post = Post(title=post.title, content=post.content, user_id=current_user.id)
     db.add(new_post)
     db.commit()
     db.refresh(new_post)
@@ -46,7 +46,7 @@ async def like_post(post_id: int,
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="You already liked this post",
         )
-    new_like = Like(post_id=post_id, user_id=current_user)
+    new_like = Like(post_id=post_id, user_id=current_user.id)
     db.add(new_like)
     db.commit()
     db.refresh(new_like)

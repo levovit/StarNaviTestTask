@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
@@ -16,3 +18,7 @@ class User(UserBase):
     class Config:
         orm_mode = True
 
+
+class UserActivity(BaseModel):
+    last_login: datetime
+    last_request: datetime
