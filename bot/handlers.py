@@ -3,11 +3,12 @@ from dotenv import load_dotenv
 import telebot
 from telebot.types import Message
 
-from utils.user_utils import create_n_users
-from utils.post_utils import create_up_to_n_posts_per_user
 from keyboards import get_main_menu_keyboard
 from strings import STRINGS
-from models import USERS
+from models import USERS, POSTS
+from utils.user_utils import create_n_users
+from utils.post_utils import create_up_to_n_posts_per_user
+from utils.like_utils import like_up_to_n_posts_per_user
 
 
 load_dotenv()
@@ -26,18 +27,29 @@ def create_n_users_handler(message: Message):
     user_num = os.getenv("NUMBER_OF_USERS")
     users = create_n_users(int(user_num))
     users_string = "\n".join([f'👻{u.username}' for u in users])
-    msg_text = f'created {user_num} users:\n' \
-               f'{users_string}'
-    bot.send_message(message.chat.id, msg_text)
+    template_txt = f'created {user_num} <b>users:</b>\n' \
+                   f'{users_string}'
+    bot.send_message(message.chat.id, template_txt, parse_mode="HTML")
 
 
 @bot.message_handler(func=lambda message: message.text == STRINGS['create_random_posts_btn'])
 def create_random_posts_handler(message: Message):
     max_posts = int(os.getenv("MAX_POSTS_PER_USER"))
     posts = create_up_to_n_posts_per_user(max_posts)
-    posts_per_user = '\n'.join([f'user👻 {u.username} created {len(u.posts)} posts📃' for u in USERS.values()])
-    template_txt = f'created {len(posts)} posts\n' \
+    posts_per_user = '\n\n'.join([f'👻<b>user</b> {u.username}\n '
+                                  f'created <b>{len(u.posts)}</b> posts📃' for u in USERS.values()])
+    template_txt = f'created <b>{len(posts)}</b> posts\n' \
                    f'{posts_per_user}'
-    bot.send_message(message.chat.id, template_txt)
+    bot.send_message(message.chat.id, template_txt, parse_mode="HTML")
 
+
+@bot.message_handler(func=lambda message: message.text == STRINGS['random_likes_btn'])
+def create_random_posts_handler(message: Message):
+    max_likes = int(os.getenv("MAX_LIKE_PER_USER"))
+    like_count = like_up_to_n_posts_per_user(max_likes)
+    posts = POSTS.values()
+    likes_per_post = '\n'.join([f'👍<b>{p.like_count}</b> likes for post: <b>{p.title}</b>' for p in posts])
+    template_txt = f'Total placed <b>{like_count}</b> likes✍️\n' \
+                   f'{likes_per_post}'
+    bot.send_message(message.chat.id, template_txt, parse_mode="HTML")
 
