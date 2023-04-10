@@ -1,6 +1,7 @@
 # StarNavi Test Task (by Vitalii Melnychuk)
 
-This project is a simple social network API built using FastAPI and SQLAlchemy
+This project is a simple social network API built using FastAPI and SQLAlchemy based on this test task:
+https://drive.google.com/file/d/1lRoKVkBTtQDdNB1Zwaa0tyJS0wkR7iT1/view
 
 Key features:
 
