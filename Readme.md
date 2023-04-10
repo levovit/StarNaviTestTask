@@ -101,6 +101,9 @@ After running the application, bot will start working automatically
 1. Start a conversation with the bot in Telegram.
 2. Use the bot's commands to interact with the API.
 
+### Ready bot
+If you don't want to create telegram bot you could just test mine: 
+[@starnavi_levovit_bot](https://t.me/starnavi_levovit_bot)
 
 ## Acknowledgments
 * Thank the StarNavi company for this chance. It was fun to create this project
