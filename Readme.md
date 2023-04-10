@@ -66,26 +66,23 @@ NUMBER_OF_USERS=3
 MAX_LIKE_PER_USER=8
 MAX_POSTS_PER_USER=6
 ```
-4. Build the Docker images:
-```env
-docker-compose build
-```
 ## Running the Application
 
 To run the application, execute the following command:
 
 ```env
-docker-compose up
+docker-compose up --build --scale test=0
 ```
 The API will be available at `http://localhost:8000`.
 
 ## Running the Tests
 
-To run the tests, execute the following command:
+To run app with tests, execute the following command:
 
 ```env
-docker-compose --profile=test up --build
+docker-compose up --build
 ```
+Tests will execute automatically before main container started
 ## API Documentation
 
 Once the application is running, you can access the interactive API documentation at `http://localhost:8000/docs`.
