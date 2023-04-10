@@ -39,5 +39,18 @@ services:
     environment:
       - DATABASE_URL=sqlite:///./test.db
 
+  telegram_bot:
+    build: bot/
+    env_file:
+      - .env
+    environment:
+      - TELEGRAM_API_KEY=${TELEGRAM_API_KEY}
+      - NUMBER_OF_USERS=${NUMBER_OF_USERS}
+      - MAX_LIKE_PER_USER=${MAX_LIKE_PER_USER}
+      - MAX_POSTS_PER_USER=${MAX_POSTS_PER_USER}
+      - WEB_APP_URL=http://web:8000
+    depends_on:
+      - web
+
 volumes:
   db_data:
