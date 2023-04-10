@@ -41,11 +41,11 @@ Before you can run the project, you need to have the following software installe
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/yourproject.git
+git clone https://github.com/levovit/StarNaviTestTask.git
 ```
 2. Change the current working directory to the project's root:
 ```bash
-cd yourproject
+cd StarNaviTestTask
 ```
 3. Create a `.env` file in the project's root directory and add your environment variables:
 ```bash
