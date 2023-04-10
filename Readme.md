@@ -24,7 +24,8 @@ The API is designed to be easy to set up and use, making it an ideal starting po
 5. [Running the Tests](#running-the-tests)
 6. [API Documentation](#api-documentation)
 7. [Telegram Bot](#telegram-bot)
-8. [Acknowledgments](#acknowledgments)
+8. [Technologies Used](#technologies-used)
+9. [Acknowledgments](#acknowledgments)
 
 ## Getting Started
 
@@ -101,6 +102,26 @@ After running the application, bot will start working automatically
 ### Ready bot
 If you don't want to create telegram bot you could just test mine: 
 [@starnavi_levovit_bot](https://t.me/starnavi_levovit_bot)
+
+## Technologies Used
+
+This project utilizes the following technologies:
+
+- **Python**: Main programming language used for writing the application logic.
+- **FastAPI**: Modern, high-performance web framework for building API, used for building the web application.
+- **Docker**: Containerization platform used to build, package, and distribute the application.
+- **Docker Compose**: Tool for defining and running multi-container Docker applications, used to manage the services and their dependencies.
+- **Uvicorn**: ASGI server used to serve the FastAPI application.
+- **SQLAlchemy**: Object-relational mapping (ORM) library used for database operations within the Flask application.
+- **PostgreSQL**: Relational database management system used for storing the application data.
+- **SQLite**: Lightweight database engine used for testing.
+- **Alembic**: Database migration tool used to manage schema changes for the SQLAlchemy ORM.
+- **pytest**: Testing framework used for writing and running tests for the application.
+- **PyTelegramBotAPI**: Python library used to interact with the Telegram Bot API and manage the Telegram bot functionality.
+- **Git**: Version control system used for tracking changes in the project's source code.
+- **NGINX**: Web server and reverse proxy server for serving the static files and forwarding requests to the FastAPI application.
+- **Google Cloud**: Cloud computing platform used for deploying and hosting the application.
+
 
 ## Acknowledgments
 * Thank the StarNavi company for this chance. It was fun to create this project
