@@ -30,6 +30,7 @@ services:
       - db_data:/var/lib/postgresql/data
 
   test:
+    profiles: ["test"]
     build:
       context: app/
       target: test
@@ -37,8 +38,6 @@ services:
       - .env
     environment:
       - DATABASE_URL=sqlite:///./test.db
-    depends_on:
-      - db
 
 volumes:
   db_data:

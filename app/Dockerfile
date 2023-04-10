@@ -16,4 +16,6 @@ ENTRYPOINT ["/bin/sh", "-c", "./entrypoint.sh"]
 
 FROM base AS test
 
-ENTRYPOINT ["pytest", "tests/"]
+RUN chmod +x ./test_entrypoint.sh
+ENTRYPOINT ["/bin/sh", "-c", "./test_entrypoint.sh"]
+

@@ -5,20 +5,12 @@ from sqlalchemy.orm import sessionmaker, close_all_sessions
 
 from config import settings
 from main import app
-
-
-# DATABASE_URL = "sqlite:///./test.db"
+from models.base import Base
 
 engine = create_engine(settings.DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-
-@pytest.fixture(scope="function")
-def db():
-    session = TestingSessionLocal()
-    yield session
-    session.close()
-    close_all_sessions()
+Base.metadata.drop_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 
 @pytest.fixture(scope="module")
@@ -37,5 +29,4 @@ def test_user(client):
     client.post("users/signup", json=user_data)
     user_data.pop('email')
     access_token = client.post("auth/login", data=user_data).json()["access_token"]
-    print(222, access_token)
     return user_data, access_token
