@@ -44,12 +44,20 @@ def create_random_posts_handler(message: Message):
 
 
 @bot.message_handler(func=lambda message: message.text == STRINGS['random_likes_btn'])
-def create_random_posts_handler(message: Message):
+def like_random_posts_handler(message: Message):
     max_likes = int(os.getenv("MAX_LIKE_PER_USER"))
     like_count = like_up_to_n_posts_per_user(max_likes)
     posts = POSTS.values()
     likes_per_post = '\n'.join([f'👍<b>{p.like_count}</b> likes for post: <b>{p.title}</b>' for p in posts])
     template_txt = f'Total placed <b>{like_count}</b> likes✍️\n' \
                    f'{likes_per_post}'
+    bot.send_message(message.chat.id, template_txt, parse_mode="HTML")
+
+
+@bot.message_handler(func=lambda message: message.text == STRINGS['read_config_btn'])
+def settings_handler(message: Message):
+    template_txt = f"{STRINGS['number_of_users_btn']}\n" \
+                   f"{STRINGS['max_posts_per_user_btn']}\n" \
+                   f"{STRINGS['max_likes_per_user_btn']}\n"
     bot.send_message(message.chat.id, template_txt, parse_mode="HTML")
 
