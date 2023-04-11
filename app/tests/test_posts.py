@@ -1,6 +1,3 @@
-import pytest
-
-
 def test_fetch_0_posts(client, test_user):
     user_data, access_token = test_user
     headers = {"Authorization": f"Bearer {access_token}"}

@@ -1,9 +1,3 @@
-import pytest
-from fastapi.testclient import TestClient
-from sqlalchemy.orm import Session
-from schemas import user_scheme
-
-
 def test_create_user(client):
     user_data = {
         "username": "test_user_for_creating",
