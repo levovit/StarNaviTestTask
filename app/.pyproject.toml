@@ -1,0 +1,20 @@
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+exclude = '''
+(
+    /(
+        \.eggs         # Exclude .eggs directory
+      | \.git          # Exclude .git directory
+      | \.hg           # Exclude .hg directory
+      | \.mypy_cache   # Exclude .mypy_cache directory
+      | \.tox          # Exclude .tox directory
+      | \.venv         # Exclude .venv directory
+      | _build         # Exclude _build directory
+      | buck-out       # Exclude buck-out directory
+      | build          # Exclude build directory
+      | dist           # Exclude dist directory
+    )/
+)
+'''

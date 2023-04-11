@@ -21,8 +21,8 @@ def test_create_post(client, test_user):
 
     assert response.status_code == 200
     created_post = response.json()
-    assert created_post['title'] == post_data['title']
-    assert created_post['content'] == post_data['content']
+    assert created_post["title"] == post_data["title"]
+    assert created_post["content"] == post_data["content"]
 
 
 def test_fetch_posts(client, test_user):

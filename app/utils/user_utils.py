@@ -3,9 +3,11 @@ from models.user import User
 
 
 def get_existing_user(db: Session, username: str, email: str) -> User:
-    return db.query(User).filter(
-        (User.username == username) | (User.email == email)
-    ).first()
+    return (
+        db.query(User)
+        .filter((User.username == username) | (User.email == email))
+        .first()
+    )
 
 
 def create_user(db: Session, user_data: User) -> User:

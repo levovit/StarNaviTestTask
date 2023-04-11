@@ -36,18 +36,26 @@ def get_post_by_id(db: Session, post_id: int) -> Post:
 
 
 def get_like_by_post_and_user(db: Session, post_id: int, user_id: int) -> Like:
-    return db.query(Like).filter(Like.post_id == post_id, Like.user_id == user_id).first()
+    return (
+        db.query(Like).filter(Like.post_id == post_id, Like.user_id == user_id).first()
+    )
 
 
 def get_analytics(db: Session, date_from, date_to):
     delta = date_to - date_from
     dates = [date_to - datetime.timedelta(days=i) for i in range(delta.days + 1)]
 
-    results = db.query(
-        func.date(Post.created_at).label("date"),
-        func.count(Post.id).label("posts"),
-        func.count(Like.id).label("likes")
-    ).outerjoin(Like).group_by("date").filter(Post.created_at.between(date_from, date_to)).all()
+    results = (
+        db.query(
+            func.date(Post.created_at).label("date"),
+            func.count(Post.id).label("posts"),
+            func.count(Like.id).label("likes"),
+        )
+        .outerjoin(Like)
+        .group_by("date")
+        .filter(Post.created_at.between(date_from, date_to))
+        .all()
+    )
 
     analytics = {}
     for d in dates:

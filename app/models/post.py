@@ -30,4 +30,3 @@ class Like(Base):
 
     user = relationship("User", back_populates="likes")
     post = relationship("Post", back_populates="likes")
-

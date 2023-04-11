@@ -27,6 +27,6 @@ def test_user(client):
         "password": "test_password",
     }
     client.post("users/signup", json=user_data)
-    user_data.pop('email')
+    user_data.pop("email")
     access_token = client.post("auth/login", data=user_data).json()["access_token"]
     return user_data, access_token
