@@ -124,6 +124,7 @@ This project utilizes the following technologies:
 - **Google Cloud**: Cloud computing platform used for deploying and hosting the application.
 - **Flake8**: A Python linting tool that checks for PEP 8 compliance and other code quality issues.
 - **Black**: A Python code formatter that automatically formats code to a consistent style.
+- **logging**: Python module used for logging messages and debugging information within the application.
 
 
 ## Acknowledgments
