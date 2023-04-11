@@ -83,7 +83,7 @@ To run app with tests, execute the following command:
 ```env
 docker-compose up --build
 ```
-Tests will execute automatically before main container started
+Tests will be executed automatically before the main container starts.
 ## API Documentation
 
 Once the application is running, you can access the interactive API documentation at `http://localhost:8000/docs`.
@@ -98,9 +98,10 @@ After running the application, bot will start working automatically
 
 1. Start a conversation with the bot in Telegram.
 2. Use the bot's commands to interact with the API.
+3. Use /start command to reset keyboard
 
 ### Ready bot
-If you don't want to create telegram bot you could just test mine: 
+If you don't want to create telegram bot you can test mine: 
 [@starnavi_levovit_bot](https://t.me/starnavi_levovit_bot)
 
 ## Technologies Used
@@ -121,7 +122,9 @@ This project utilizes the following technologies:
 - **Git**: Version control system used for tracking changes in the project's source code.
 - **NGINX**: Web server and reverse proxy server for serving the static files and forwarding requests to the FastAPI application.
 - **Google Cloud**: Cloud computing platform used for deploying and hosting the application.
+- **Flake8**: A Python linting tool that checks for PEP 8 compliance and other code quality issues.
+- **Black**: A Python code formatter that automatically formats code to a consistent style.
 
 
 ## Acknowledgments
-* Thank the StarNavi company for this chance. It was fun to create this project
+* Special thanks to StarNavi company for this opportunity. It was a pleasure to create this project
