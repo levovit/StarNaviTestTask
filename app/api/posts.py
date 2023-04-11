@@ -8,9 +8,10 @@ from utils.auth_utils import get_current_user
 from utils.db_utils import get_db
 from utils import post_utils
 from schemas import post_scheme, user_scheme
-
+from utils.logger_utils import get_logger
 
 router = APIRouter()
+logger = get_logger(__name__)
 
 
 @router.post("/", response_model=post_scheme.Post)
@@ -20,6 +21,7 @@ def create_post_route(
     db: Annotated[Session, Depends(get_db)],
 ):
     new_post = post_utils.create_post(db, post, current_user.id)
+    logger.info(f"Post {new_post.id} created by user {current_user.id}.")
     return new_post
 
 
@@ -50,6 +52,7 @@ def like_post_route(
             detail="You already liked this post",
         )
     post_utils.like_post(db, post_id, current_user.id)
+    logger.info(f"User {current_user.id} liked post {post_id}.")
     return post
 
 
@@ -73,6 +76,7 @@ def unlike_post_route(
             detail="You didn't like this post",
         )
     post_utils.unlike_post(db, like)
+    logger.info(f"User {current_user.id} unliked post {post_id}.")
     return post
 
 
