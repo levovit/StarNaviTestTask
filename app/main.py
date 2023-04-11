@@ -10,7 +10,7 @@ Base.metadata.create_all(bind=engine)
 
 app.include_router(api_router)
 
-logger = get_logger('startups')
+logger = get_logger("startups")
 
 
 @app.on_event("startup")
